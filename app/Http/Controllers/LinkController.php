@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use App\Repositories\IRepository;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\LinkRequest;
+use App\Http\Resources\Link as LinkResource;
+use App\Http\Resources\LinkHistory as LinkHistoryResource;
+use App\Exceptions\ModelNotFoundException;
 
 class LinkController extends Controller
 {
@@ -26,10 +29,10 @@ class LinkController extends Controller
 
         $link = new Link();
 
-        $linkFinded =  $this->linkRepository->search('url', '=', $data['url']);
+        $linkFound =  $this->linkRepository->search('url', '=', $data['url']);
 
-        if ($linkFinded) {
-            $link = $linkFinded;
+        if ($linkFound) {
+            $link = $linkFound;
         } else {
 
             $link->url = $data['url'];
@@ -42,16 +45,17 @@ class LinkController extends Controller
 
             $link->save();
         }
-        return response()->json([
-            'key' => $link->key,
-            'generated-url' => url("/{$link->key}"),
-            'original-url' => $link->url,
-        ], 201);
+
+        return response()->json(["url" => new LinkResource($link)], 201);
     }
 
     public function get($key)
     {
         $link = $this->linkRepository->search('key', 'LIKE BINARY', $key);
+
+        if (!$link) {
+            throw new ModelNotFoundException();
+        }
 
         $link->histories()->save(new LinkHistory());
 
@@ -61,8 +65,10 @@ class LinkController extends Controller
     public function getTop()
     {
         $links = $this->linkRepository->getTop();
-        return response()->json([
-            'links' => $links
-        ], 200);
+
+        return response()->json(
+            ['links' => LinkHistoryResource::collection($links)],
+            200
+        );
     }
 }

@@ -18,6 +18,6 @@ use Illuminate\Http\Request;
 });*/
 
 
-Route::get('/link/{key}', 'LinkController@get');
+Route::get('/{key}', 'LinkController@get');
 Route::get('/link/top', 'LinkController@getTop');
 Route::post('/link', 'LinkController@create');

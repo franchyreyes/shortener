@@ -16,7 +16,7 @@ class Link extends JsonResource
     {
 
         return [
-            'genetared' => url("/{$this->key}"),
+            'generated' => url("/{$this->key}"),
             'original' => $this->url,
             'key'   => $this->key
         ];

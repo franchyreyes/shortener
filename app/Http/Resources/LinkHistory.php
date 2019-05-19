@@ -14,8 +14,6 @@ class LinkHistory extends JsonResource
      */
     public function toArray($request)
     {
-        //return parent::toArray($request);
-
         return [
             'key' => $this->key,
             'url' => $this->url,

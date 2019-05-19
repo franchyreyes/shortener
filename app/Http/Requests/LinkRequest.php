@@ -4,8 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Http\Response;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class LinkRequest extends FormRequest
@@ -46,6 +44,11 @@ class LinkRequest extends FormRequest
         ];
     }
 
+    /**
+     * Custom message for validation
+     *
+     * @return HttpResponseException
+     */
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json($this->messages(), 422));

@@ -70,14 +70,9 @@ DB_PASSWORD=
 
 ## Instalación de Laravel Homestead
 
-1- Clonar el repositorio del proyecto
+1 - [Descarga VirtualBox](https://www.virtualbox.org/wiki/Downloads): el archivo a descargar varía dependiendo del sistema operativo
 
-```
-git clone https://github.com/franchyreyes/shortener.git
-```
-2 - [Descarga VirtualBox](https://www.virtualbox.org/wiki/Downloads): el archivo a descargar varía dependiendo del sistema operativo
-
-3 - [Descarga Vagrant](https://www.vagrantup.com/downloads.html): de nuevo el archivo a descargar depende del sistema operativo 
+2 - [Descarga Vagrant](https://www.vagrantup.com/downloads.html): de nuevo el archivo a descargar depende del sistema operativo 
 
 3 - Instala VirtualBox: siguiendo los pasos del instalador
 
